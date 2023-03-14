@@ -1,5 +1,0 @@
-module:opentdk.gui
-com.kostikiadis.charts
-org.opentdk.gui.application
-org.opentdk.gui.chart
-org.opentdk.gui.controls

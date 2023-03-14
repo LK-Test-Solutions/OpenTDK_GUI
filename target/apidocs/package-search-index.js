@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"opentdk.gui","l":"com.kostikiadis.charts"},{"m":"opentdk.gui","l":"org.opentdk.gui.application"},{"m":"opentdk.gui","l":"org.opentdk.gui.chart"},{"m":"opentdk.gui","l":"org.opentdk.gui.controls"}];updateSearchResults();
