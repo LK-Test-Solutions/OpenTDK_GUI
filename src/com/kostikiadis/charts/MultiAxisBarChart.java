@@ -158,12 +158,12 @@ public class MultiAxisBarChart<X, Y> extends MultiAxisChart<X, Y> {
 	 * Construct a new MultiAxisBarChart with the given axis and data. The two axis should be a ValueAxis/NumberAxis and a CategoryAxis, they can be in
 	 * either order depending on if you want a horizontal or vertical bar chart.
 	 *
-	 * @param xAxis  The x axis to use
-	 * @param y1Axis The y axis to use
-	 * @param y2Axis The second y axis to use
+	 * @param xAxis  The x-axis to use
+	 * @param y1Axis The y-axis to use
+	 * @param y2Axis The second y-axis to use
 	 * @param data   The data to use, this is the actual list used so any changes to it will be reflected in the chart
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MultiAxisBarChart(Axis<X> xAxis, Axis<Y> y1Axis, Axis<Y> y2Axis, ObservableList<Series<X, Y>> data) {
 		super(xAxis, y1Axis, y2Axis);
 		getStyleClass().add("bar-chart");
@@ -171,7 +171,7 @@ public class MultiAxisBarChart<X, Y> extends MultiAxisChart<X, Y> {
 
 		categoryAxis = (CategoryAxis) xAxis;
 
-		valueAxis = (ValueAxis<? super Number>) y1Axis;
+		valueAxis = (ValueAxis) y1Axis;
 		orientation = Orientation.VERTICAL;
 
 		// update CSS
@@ -184,9 +184,9 @@ public class MultiAxisBarChart<X, Y> extends MultiAxisChart<X, Y> {
 	 * Construct a new MultiAxisBarChart with the given axis and data. The two axis should be a ValueAxis/NumberAxis and a CategoryAxis, they can be in
 	 * either order depending on if you want a horizontal or vertical bar chart.
 	 *
-	 * @param xAxis       The x axis to use
-	 * @param y1Axis      The y axis to use
-	 * @param y2Axis      The second y axis to use
+	 * @param xAxis       The x-axis to use
+	 * @param y1Axis      The y-axis to use
+	 * @param y2Axis      The second y-axis to use
 	 * @param data        The data to use, this is the actual list used so any changes to it will be reflected in the chart
 	 * @param categoryGap The gap to leave between bars in separate categories
 	 */

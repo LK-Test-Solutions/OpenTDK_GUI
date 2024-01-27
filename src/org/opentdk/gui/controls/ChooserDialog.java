@@ -47,7 +47,7 @@ import javafx.stage.FileChooser;
  * List{@literal <File>} files = ChooserDialog.openFileChooser(TITLE, ExtensionType.FILE, DialogType.CHOOSE, LATESTPATH); 
  * </pre>
  * 
- * The latest path can stored in a properties file or set to null to open the
+ * The latest path can be stored in a properties file or set to null to open the
  * default path (user home).<br>
  * <br>
  * 
@@ -91,7 +91,7 @@ public final class ChooserDialog {
 	}
 
 	/**
-	 * Show the OS depending explorer to open or save files. The latest path is
+	 * Show the OS depending on the explorer to open or save files. The latest path is
 	 * default user.home.
 	 * 
 	 * @param title the title of the chooser dialog
@@ -104,7 +104,7 @@ public final class ChooserDialog {
 	}
 
 	/**
-	 * Show the OS depending explorer to open or save files.
+	 * Show the OS depending on the explorer to open or save files.
 	 * 
 	 * @param title      the title of the chooser dialog
 	 * @param ext        the extension of the files that should be displayed by
@@ -123,18 +123,24 @@ public final class ChooserDialog {
 			chooserTitle = title;
 		}
 
-		String pathToLoad = null;
+		File pathToLoad = null;
+		File temp = null;
 		if (latestPath == null || latestPath.isBlank()) {
-			pathToLoad = System.getProperty("user.home");
+			temp = new File(System.getProperty("user.home"));
 		} else {
-			pathToLoad = latestPath;
+			temp = new File(latestPath);
+			if(!temp.exists() || !temp.isDirectory())	{
+				temp = new File(System.getProperty("user.home"));
+				MLogger.getInstance().log(Level.WARNING, "Latest path does not exist or is no directory", ChooserDialog.class.getSimpleName(), "openFileChooserDialog");
+			}
 		}
+		pathToLoad = temp; // In any case there is directory to load
 
 		final FileChooser fileChooser = new FileChooser();
 
-		File file = new File(pathToLoad);
 		fileChooser.setTitle(chooserTitle);
-		fileChooser.setInitialFileName(file.getName());
+		fileChooser.setInitialFileName(pathToLoad.getName());
+		fileChooser.setInitialDirectory(pathToLoad);
 		fileChooser.getExtensionFilters().addAll(ext.getFilters());
 
 		switch (type) {
@@ -143,12 +149,12 @@ public final class ChooserDialog {
 		case SAVE:
 			return Arrays.asList(fileChooser.showSaveDialog(null));
 		default:
-			throw new RuntimeException("No DialogType detected in openFileDialog");
+			throw new RuntimeException("No DialogType detected in openFileChooser");
 		}
 	}
 
 	/**
-	 * Show the OS depending explorer to open directories. The latest path is
+	 * Show the OS depending on the explorer to open directories. The latest path is
 	 * default user.home.
 	 * 
 	 * @param title title of the window
@@ -159,7 +165,7 @@ public final class ChooserDialog {
 	}
 
 	/**
-	 * Show the OS depending explorer to open directories.
+	 * Show the OS depending on the explorer to open directories.
 	 * 
 	 * @param title  title of the window
 	 * @param latest if the latest path was stored, it can be used to open the

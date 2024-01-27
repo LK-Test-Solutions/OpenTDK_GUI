@@ -62,7 +62,7 @@ public final class ChartFont {
 		this.checkFamily(family);
 	}
 
-	private final void checkSize(int size) {
+	private void checkSize(int size) {
 		if (size < 0 || size > Integer.MAX_VALUE) {
 			MLogger.getInstance().log(Level.SEVERE, "Size is negative or out of integer bounds ==> Use default " + this.size, getClass().getSimpleName(), "setSize");
 			return;
@@ -70,11 +70,11 @@ public final class ChartFont {
 		this.size = size;
 	}
 
-	private final void checkWeight(FontWeight weight) {
+	private void checkWeight(FontWeight weight) {
 		this.weight = weight;
 	}
 
-	private final void checkFamily(String family) {
+	private void checkFamily(String family) {
 		if (family == null || family.isBlank() || family.length() > Integer.MAX_VALUE) {
 			MLogger.getInstance().log(Level.SEVERE, "Family is null, blank or too large ==> Use default " + this.family, getClass().getSimpleName(), "setFamily");
 			return;
@@ -94,15 +94,15 @@ public final class ChartFont {
 		return new ChartFont(size, weight, family);
 	}
 
-	public final String getFamily() {
+	public String getFamily() {
 		return family;
 	}
 
-	public final FontWeight getWeight() {
+	public FontWeight getWeight() {
 		return weight;
 	}
 
-	public final int getSize() {
+	public int getSize() {
 		return size;
 	}
 
