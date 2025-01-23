@@ -27,10 +27,6 @@
  */
 package org.opentdk.gui.chart;
 
-import java.util.logging.Level;
-
-import org.opentdk.api.logger.MLogger;
-
 import javafx.geometry.Insets;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -64,11 +60,11 @@ public final class ChartBorder {
 	private BorderWidths widths = BorderWidths.DEFAULT;
 	private Insets insets = Insets.EMPTY;
 
-	public ChartBorder() {
+	private ChartBorder() {
 		super();
 	}
 
-	public ChartBorder(Color colorTop, Color colorRight, Color colorBottom, Color colorLeft) {
+	private ChartBorder(Color colorTop, Color colorRight, Color colorBottom, Color colorLeft) {
 		setColorTop(colorTop);
 		setColorRight(colorRight);
 		setColorBottom(colorBottom);
@@ -83,95 +79,51 @@ public final class ChartBorder {
 		return new ChartBorder(colorTop, colorRight, colorBottom, colorLeft);
 	}
 
-	public final Border getBorder() {
+	public Border getBorder() {
 		return new Border(new BorderStroke(colorTop, colorRight, colorBottom, colorLeft, styleTop, styleRight, styleBottom, styleLeft, radii, widths, insets));
 	}
 
 	public void setColorTop(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.colorTop, getClass().getSimpleName(), "setColorTop");
-			return;
-		}
 		this.colorTop = color;
 	}
 
-	public final void setColorRight(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.colorRight, getClass().getSimpleName(), "setColorRight");
-			return;
-		}
+	public void setColorRight(Color color) {
 		this.colorRight = color;
 	}
 
-	public final void setColorBottom(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.colorBottom, getClass().getSimpleName(), "setColorBottom");
-			return;
-		}
+	public void setColorBottom(Color color) {
 		this.colorBottom = color;
 	}
 
-	public final void setColorLeft(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.colorLeft, getClass().getSimpleName(), "setColorLeft");
-			return;
-		}
+	public void setColorLeft(Color color) {
 		this.colorLeft = color;
 	}
 
-	public final void setStyleTop(BorderStrokeStyle style) {
-		if (style == null) {
-			MLogger.getInstance().log(Level.SEVERE, "BorderStrokeStyle is null ==> Use default " + this.styleTop, getClass().getSimpleName(), "setStyleTop");
-			return;
-		}
+	public void setStyleTop(BorderStrokeStyle style) {
 		this.styleTop = style;
 	}
 
-	public final void setStyleRight(BorderStrokeStyle style) {
-		if (style == null) {
-			MLogger.getInstance().log(Level.SEVERE, "BorderStrokeStyle is null ==> Use default " + this.styleRight, getClass().getSimpleName(), "setStyleRight");
-			return;
-		}
+	public void setStyleRight(BorderStrokeStyle style) {
 		this.styleRight = style;
 	}
 
-	public final void setStyleBottom(BorderStrokeStyle style) {
-		if (style == null) {
-			MLogger.getInstance().log(Level.SEVERE, "BorderStrokeStyle is null ==> Use default " + this.styleBottom, getClass().getSimpleName(), "setStyleBottom");
-			return;
-		}
+	public void setStyleBottom(BorderStrokeStyle style) {
 		this.styleBottom = style;
 	}
 
-	public final void setStyleLeft(BorderStrokeStyle style) {
-		if (style == null) {
-			MLogger.getInstance().log(Level.SEVERE, "BorderStrokeStyle is null ==> Use default " + this.styleLeft, getClass().getSimpleName(), "setStyleLeft");
-			return;
-		}
+	public void setStyleLeft(BorderStrokeStyle style) {
 		this.styleLeft = style;
 	}
 
-	public final void setRadii(CornerRadii value) {
-		if (value == null) {
-			MLogger.getInstance().log(Level.SEVERE, "CornerRadii is null ==> Use default " + this.radii, getClass().getSimpleName(), "setRadii");
-			return;
-		}
+	public void setRadii(CornerRadii value) {
 		this.radii = value;
 	}
 
-	public final void setWidths(BorderWidths value) {
-		if (value == null) {
-			MLogger.getInstance().log(Level.SEVERE, "BorderWidths is null ==> Use default " + this.widths, getClass().getSimpleName(), "setWidths");
-			return;
-		}
+	public void setWidths(BorderWidths value) {
 		this.widths = value;
 	}
 
-	public final void setInsets(Insets value) {
-		if (value == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Insets is null ==> Use default " + this.insets, getClass().getSimpleName(), "setInsets");
-			return;
-		}
+	public void setInsets(Insets value) {
 		this.insets = value;
 	}
 

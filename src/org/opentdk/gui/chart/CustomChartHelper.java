@@ -28,10 +28,8 @@
 package org.opentdk.gui.chart;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import com.kostikiadis.charts.MultiAxisChart.Data;
-import org.opentdk.api.logger.MLogger;
 
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.CategoryAxis;
@@ -57,15 +55,13 @@ public class CustomChartHelper<X, Y> {
 
 			if (xAxis instanceof CategoryAxis) {
 				if (xsValue == null) {
-					MLogger.getInstance().log(Level.SEVERE, "xAxis is of type category but marker xValue is not set. Marker gets not added to the chart.", getClass().getSimpleName(), "addChartMarkers");
-					continue;
+					throw new IllegalArgumentException("xAxis is of type category but marker xValue is not set");
 				} else {
 					point.setXValue((X) xsValue);
 				}
 			} else if (xAxis instanceof NumberAxis) {
 				if (xnValue.intValue() == -1) {
-					MLogger.getInstance().log(Level.SEVERE, "xAxis is of type number but marker xValue is not set. Marker gets not added to the chart.", getClass().getSimpleName(), "addChartMarkers");
-					continue;
+					throw new IllegalArgumentException("xAxis is of type number but marker xValue is not set");
 				} else {
 					point.setXValue((X) xnValue);
 				}
@@ -73,15 +69,13 @@ public class CustomChartHelper<X, Y> {
 
 			if (y1Axis instanceof CategoryAxis) {
 				if (ysValue == null) {
-					MLogger.getInstance().log(Level.SEVERE, "y1Axis is of type category but marker yValue is not set. Marker gets not added to the chart.", getClass().getSimpleName(), "addChartMarkers");
-					continue;
+					throw new IllegalArgumentException("y1Axis is of type category but marker yValue is not set. Marker gets not added to the chart");
 				} else {
 					point.setYValue((Y) ysValue);
 				}
 			} else if (y1Axis instanceof NumberAxis) {
 				if (ynValue.intValue() == -1) {
-					MLogger.getInstance().log(Level.SEVERE, "y1Axis is of type number but marker yValue is not set. Marker gets not added to the chart.", getClass().getSimpleName(), "addChartMarkers");
-					continue;
+					throw new IllegalArgumentException("y1Axis is of type number but marker yValue is not set. Marker gets not added to the chart");
 				} else {
 					point.setYValue((Y) ynValue);
 				}
@@ -97,19 +91,8 @@ public class CustomChartHelper<X, Y> {
 			}
 
 			for (Shape child : marker.getChildren()) {
-//				Arc arc = null;
-//				Circle circle = null;
-//				CubicCurve cubicCurve = null;
-//				Ellipse ellipse = null;
-//				Line line = null; 
-//				Path path = null; 
-//				Polygon polygon = null;
-//				Polyline polyline = null;
-//				QuadCurve curve = null; 
-//				Rectangle rectangle = null;
-//				SVGPath svgPath = null; 
 				if (child instanceof Arc) {
-
+					// TODO
 				} else if (child instanceof Circle) {
 
 				} else if (child instanceof Line) {

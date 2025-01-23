@@ -29,10 +29,8 @@ package org.opentdk.gui.chart;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import com.kostikiadis.charts.MultiAxisChart;
-import org.opentdk.api.logger.MLogger;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -61,7 +59,7 @@ import javafx.scene.shape.Shape;
  * @author FME (LK Test Solutions)
  *
  */
-public class ChartSeries {
+public final class ChartSeries {
 
 	private String seriesName = "";
 	private List<String> seriesValues = new ArrayList<>();
@@ -74,115 +72,83 @@ public class ChartSeries {
 	private Shape seriesLegendNode = new Rectangle(10, 10, 10, 10);
 	private int belongingAxis = MultiAxisChart.Y1_AXIS;
 
-	public final String getSeriesName() {
+	public String getSeriesName() {
 		return seriesName;
 	}
 
-	public final void setSeriesName(String name) {
-		if (name == null || name.length() > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Value is null or too large ==> Use default " + this.seriesName, getClass().getSimpleName(), "setSeriesName");
-			return;
-		}
+	public void setSeriesName(String name) {
 		this.seriesName = name;
 	}
 
-	public final List<String> getSeriesValues() {
+	public List<String> getSeriesValues() {
 		return seriesValues;
 	}
 
-	public final void setSeriesValues(List<String> values) {
-		if (values == null || values.size() > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Values null or too large ==> No chart series to add", getClass().getSimpleName(), "setSeriesValues");
-			return;
-		}
+	public void setSeriesValues(List<String> values) {
 		this.seriesValues = values;
 	}
 
-	public final Shape getSeriesSymbol() {
+	public Shape getSeriesSymbol() {
 		return seriesSymbol;
 	}
 
-	public final void setSeriesSymbol(Shape symbol) {
-		if (symbol == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Symbol is null ==> Use default " + this.seriesSymbol, getClass().getSimpleName(), "setSeriesSymbol");
-			return;
-		}
+	public void setSeriesSymbol(Shape symbol) {
 		this.seriesSymbol = symbol;
 	}
 
-	public final boolean isValuesConnected() {
+	public boolean isValuesConnected() {
 		return valuesConnected;
 	}
 
-	public final void setValuesConnected(boolean valuesConnected) {
+	public void setValuesConnected(boolean valuesConnected) {
 		this.valuesConnected = valuesConnected;
 	}
 
-	public final Color getSeriesColor() {
+	public Color getSeriesColor() {
 		return seriesColor;
 	}
 
-	public final void setSeriesColor(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.seriesColor, getClass().getSimpleName(), "setSeriesColor");
-			return;
-		}
+	public void setSeriesColor(Color color) {
 		this.seriesColor = color;
 	}
 
-	public final int getSeriesFontSize() {
+	public int getSeriesFontSize() {
 		return seriesFontSize;
 	}
 
-	public final void setSeriesFontSize(int size) {
-		if (size < Integer.MIN_VALUE || size > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Size out of bounds ==> Use default " + this.seriesFontSize, getClass().getSimpleName(), "setSeriesFontSize");
-			return;
-		}
+	public void setSeriesFontSize(int size) {
 		this.seriesFontSize = size;
 	}
 
-	public final int getSeriesSymbolSize() {
+	public int getSeriesSymbolSize() {
 		return seriesSymbolSize;
 	}
 
-	public final void setSeriesSymbolSize(int size) {
-		if (size < Integer.MIN_VALUE || size > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Size out of bounds ==> Use default " + this.seriesSymbolSize, getClass().getSimpleName(), "setSeriesSymbolSize");
-			return;
-		}
+	public void setSeriesSymbolSize(int size) {
 		this.seriesSymbolSize = size;
 	}
 
-	public final boolean isSeriesLabelVisible() {
+	public boolean isSeriesLabelVisible() {
 		return seriesLabelVisible;
 	}
 
-	public final void setSeriesLabelVisible(boolean seriesLabelVisible) {
+	public void setSeriesLabelVisible(boolean seriesLabelVisible) {
 		this.seriesLabelVisible = seriesLabelVisible;
 	}
 
-	public final Shape getSeriesLegendNode() {
+	public Shape getSeriesLegendNode() {
 		return seriesLegendNode;
 	}
 
-	public final void setSeriesLegendNode(Shape node) {
-		if (node == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Shape is null ==> Use default " + this.seriesLegendNode, getClass().getSimpleName(), "setSeriesLegendNode");
-			return;
-		}
+	public void setSeriesLegendNode(Shape node) {
 		this.seriesLegendNode = node;
 	}
 
-	public final int getBelongingAxis() {
+	public int getBelongingAxis() {
 		return belongingAxis;
 	}
 
-	public final void setBelongingAxis(int type) {
-		if (type < Integer.MIN_VALUE || type > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Size out of bounds ==> Use default " + this.belongingAxis, getClass().getSimpleName(), "setBelongingAxis");
-			return;
-		}
+	public void setBelongingAxis(int type) {
 		this.belongingAxis = type;
 	}
 

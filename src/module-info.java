@@ -11,7 +11,5 @@ module opentdk.gui {
 	requires transitive javafx.graphics;	
 	requires transitive javafx.swing;
 	
-	requires transitive java.logging;	
-	requires transitive opentdk.api;
-
+	requires transitive java.logging;
 }

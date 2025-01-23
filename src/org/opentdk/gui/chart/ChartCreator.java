@@ -30,14 +30,12 @@ package org.opentdk.gui.chart;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import com.kostikiadis.charts.Legend;
 import com.kostikiadis.charts.Legend.LegendItem;
 import com.kostikiadis.charts.MultiAxisChart;
 import com.kostikiadis.charts.MultiAxisChart.Data;
 import com.kostikiadis.charts.MultiAxisChart.Series;
-import org.opentdk.api.logger.MLogger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,7 +60,6 @@ public class ChartCreator {
 
 	protected ChartCreator(ChartProperties props) {
 		cp = props;
-//		cp = new ChartProperties(props);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -72,16 +69,10 @@ public class ChartCreator {
 		y2Axis = initAxis(cp.getY2Axis(), cp.getY2AxisBorder(), false);
 
 		switch (type) {
-		case BAR:
-			chart = new CustomBarChart(xAxis, y1Axis, null);
-			break;
-		case LINE:
-			chart = new CustomLineChart(xAxis, y1Axis, y2Axis);
-			break;
-		case NONE:
-			throw new RuntimeException("No chart type detected.");
+			case BAR -> chart = new CustomBarChart(xAxis, y1Axis, null);
+			case LINE -> chart = new CustomLineChart(xAxis, y1Axis, y2Axis);
+			case NONE -> throw new RuntimeException("No chart type detected.");
 		}
-//		MLogger.getInstance().log(Level.INFO, "Initialized chart as " + chart.getClass().getSimpleName(), getClass().getSimpleName(), "createChart");
 
 		configureChart();
 		addChartData();
@@ -114,14 +105,14 @@ public class ChartCreator {
 			} else {
 				((NumberAxis) axis).setUpperBound(rng);
 			}
-			((NumberAxis) axis).setTickLabelFormatter(new StringConverter<Number>() {
+			((NumberAxis) axis).setTickLabelFormatter(new StringConverter<>() {
 				@Override
 				public String toString(Number object) {
 					double i = object.doubleValue();
 					String ret = null;
 					if (i > rng) {
 						ret = "";
-					} else if (i == 0 && properties.getForceZeroInRange() == false) {
+					} else if (i == 0 && !properties.getForceZeroInRange()) {
 						ret = "";
 					} else {
 						NumberFormat format = cp.getNumberAxisFormat();
@@ -191,7 +182,7 @@ public class ChartCreator {
 		ObservableList<LegendItem> legendItems = FXCollections.<LegendItem>observableArrayList();
 		List<ChartSeries> series = cp.getSeriesValues();
 		if (series == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Series list is null ==> no data to add", getClass().getSimpleName(), "addChartData");
+			throw new IllegalArgumentException("Series list is null ==> no data to add");
 		} else {
 			for (ChartSeries serie : series) {
 				List<String> values = serie.getSeriesValues();
@@ -229,7 +220,7 @@ public class ChartCreator {
 								xVal = Double.parseDouble(String.valueOf(xVal));
 								yVal = String.valueOf(nextValue);
 							} else {
-								throw new RuntimeException("ChartCreator ==> xAxis and y1Axis are no instance of a valid axis type.");
+								throw new IllegalStateException("ChartCreator ==> xAxis and y1Axis are no instance of a valid axis type.");
 							}
 						} else if (belongingAxis == 1) {
 							if (xAxis instanceof CategoryAxis && y2Axis instanceof NumberAxis) {
@@ -245,10 +236,10 @@ public class ChartCreator {
 								xVal = Double.parseDouble(String.valueOf(xVal));
 								yVal = String.valueOf(nextValue);
 							} else {
-								throw new RuntimeException("ChartCreator ==> xAxis and y2Axis are no instance of a valid axis type.");
+								throw new IllegalStateException("ChartCreator ==> xAxis and y2Axis are no instance of a valid axis type.");
 							}
 						} else {
-							MLogger.getInstance().log(Level.WARNING, "Belonging axis is neither 0 (y1Axis) nore 1 (y2Axis)", getClass().getSimpleName(), "addChartData");
+							throw new IllegalArgumentException("Belonging axis is neither 0 (y1Axis) nore 1 (y2Axis)");
 						}
 						Data<Object, Object> nextData = new Data<>(xVal, yVal, belongingAxis);
 						nextSerie.getData().add(nextData);
@@ -265,7 +256,7 @@ public class ChartCreator {
 
 							if (styleClass.contains("chart-line-symbol")) {
 								String fxShape = "";
-								if (serie.isSeriesLabelVisible() == false) {
+								if (!serie.isSeriesLabelVisible()) {
 									fxShape = "-fx-background-color: transparent";
 								}
 								String color = toRGB(serie.getSeriesColor());
@@ -278,8 +269,6 @@ public class ChartCreator {
 								String style = String.format("-fx-bar-fill: %s;", toRGB(serie.getSeriesColor()));
 								((CustomBarChart<?, ?>) chart).setCustomCategoryGap(cp.getCategoryGap());
 								data.getNode().setStyle(style);
-							} else {
-								MLogger.getInstance().log(Level.INFO, "No series data node type detected to style", getClass().getSimpleName(), "addChartData");
 							}
 						}
 					}
@@ -287,7 +276,7 @@ public class ChartCreator {
 						ObservableList<String> styleClass = nextSerie.getNode().getStyleClass();
 						if (styleClass.contains("chart-series-line")) {
 							String lineStyle;
-							if (serie.isValuesConnected() == false) {
+							if (!serie.isValuesConnected()) {
 								lineStyle = "-fx-stroke: transparent;";
 							} else {
 								lineStyle = String.format("-fx-stroke: %s;", toRGB(serie.getSeriesColor()));
@@ -300,7 +289,7 @@ public class ChartCreator {
 			}
 		}
 		Legend legend = new Legend();
-		if (cp.isLegendVisible() == true) {
+		if (cp.isLegendVisible()) {
 			legend.setItems(legendItems);
 		}
 		if (chart instanceof CustomLineChart) {
@@ -308,7 +297,7 @@ public class ChartCreator {
 		} else if (chart instanceof CustomBarChart) {
 			((CustomBarChart<?, ?>) chart).setLegend(legend);
 		} else {
-			throw new RuntimeException("Chart object is no instance of one of the supported types ==> addChartMarkers");
+			throw new IllegalStateException("Chart object is no instance of one of the supported types ==> addChartMarkers");
 		}
 	}
 
@@ -319,7 +308,7 @@ public class ChartCreator {
 			} else if (chart instanceof CustomBarChart) {
 				((CustomBarChart<?, ?>) chart).addMarker(marker);
 			} else {
-				throw new RuntimeException("Chart object is no instance of one of the supported types ==> addChartMarkers");
+				throw new IllegalStateException("Chart object is no instance of one of the supported types ==> addChartMarkers");
 			}
 		}
 	}

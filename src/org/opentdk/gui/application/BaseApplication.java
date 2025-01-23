@@ -30,14 +30,12 @@ package org.opentdk.gui.application;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
 import org.opentdk.gui.controls.ChoiceBox;
 import org.opentdk.gui.controls.InputDialog;
 import org.opentdk.gui.controls.MessageDialog;
-
-import org.opentdk.api.logger.MLogger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -157,11 +155,11 @@ public abstract class BaseApplication extends Application {
 	protected abstract void showRootLayout();
 
 	/**
-	 * Gets called after {@link #launch(String...)} was called by the sub class in
+	 * Gets called after {@link #launch(String...)} was called by the subclass in
 	 * the main method. The method is empty by default and is used here to
 	 * initialize the <code>MLogger</code> class.
 	 */
-	public void init() throws Exception {
+	public void init() {
 //		MLogger.getInstance().setLogFile(EBaseAppSettings.APP_LOGFILE.getValue());
 //		MLogger.getInstance().setTraceLevel(Integer.valueOf(EBaseAppSettings.APP_TRACE_LEVEL.getValue()));
 	}
@@ -209,8 +207,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public final void setChoiceBoxSize(Insets size) {
 		if (size == null || size == Insets.EMPTY) {
-			MLogger.getInstance().log(Level.SEVERE, "Insets are null or empty", this.getClass().getSimpleName(), "setChoiceBoxSize");
-			return;
+			throw new IllegalArgumentException("Insets are null or empty ==> setChoiceBoxSize");
 		}
 		this.choiceBoxSize = size;
 	}
@@ -226,7 +223,7 @@ public abstract class BaseApplication extends Application {
 	/**
 	 * @return the instance of the MessageDialog object. MessageDialog is
 	 * used to display any application message like error, warning, information etc.
-	 * in a pop up dialog.
+	 * in a popup dialog.
 	 */
 	public MessageDialog getMessageDialog() {
 		return new MessageDialog(this.resourceBundle);
@@ -251,8 +248,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public void setStyleSheet(String css) {
 		if (css == null || css.isBlank() || css.length() > Short.MAX_VALUE || !css.endsWith(".css")) {
-			MLogger.getInstance().log(Level.SEVERE, "Invalid parameter 'css'. No style sheet gets used", getClass().getSimpleName(), "setStyleSheet");
-			return;
+			throw new IllegalArgumentException("Invalid parameter 'css'. No style sheet gets used ==> setStyleSheet");
 		}
 		this.styleSheet = css;
 	}
@@ -305,8 +301,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public void setWidth(double width) {
 		if (width <= 0 || width > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "The comitted width is not in the range 1 to Integer.MAXVALUE ==> Use default " + this.width);
-			return;
+			throw new IllegalArgumentException("The committed width is not in the range 1 to Integer.MAXVALUE");
 		}
 		this.width = width;
 	}
@@ -325,8 +320,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public void setHeight(double height) {
 		if (height <= 0 || height > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "The comitted height is not in the range 1 to Integer.MAXVALUE ==> Use default " + this.height);
-			return;
+			throw new IllegalArgumentException("The committed height is not in the range 1 to Integer.MAXVALUE");
 		}
 		this.height = height;
 	}
@@ -345,8 +339,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public void setPosX(double posX) {
 		if (posX <= 0 || posX > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "The comitted posX is not in the range 1 to Integer.MAXVALUE ==> Use default " + this.posX);
-			return;
+			throw new IllegalArgumentException("The comitted posX is not in the range 1 to Integer.MAXVALUE ==> Use default " + this.posX);
 		}
 		this.posX = posX;
 	}
@@ -365,8 +358,7 @@ public abstract class BaseApplication extends Application {
 	 */
 	public void setPosY(double posY) {
 		if (posY <= 0 || posY > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "The comitted posY is not in the range 1 to Integer.MAXVALUE ==> Use default " + this.posY);
-			return;
+			throw new IllegalArgumentException("The committed posY is not in the range 1 to Integer.MAXVALUE");
 		}
 		this.posY = posY;
 	}
@@ -388,8 +380,7 @@ public abstract class BaseApplication extends Application {
 	}
 
 	/**
-	 * Show a new stage on the screen. For an example usage see
-	 * {@link #BaseApplication()}.
+	 * Show a new stage on the screen.
 	 * 
 	 * @param fxmlFile The FXML file that defines the looks of the stage.
 	 * @param title    Text on the top of the window.
@@ -419,9 +410,12 @@ public abstract class BaseApplication extends Application {
 		if (this.styleSheet != null) {
 			URL cssLocation = this.getClass().getResource(this.styleSheet);
 			if (cssLocation == null) {
-				MLogger.getInstance().log(Level.WARNING, "Style sheet CSS file not found.");
+				throw new IllegalArgumentException("Style sheet CSS file not found.");
 			} else {
-				scene.getStylesheets().add(this.getClass().getResource(this.styleSheet).toExternalForm());
+				URL classResource = this.getClass().getResource(this.styleSheet);
+				if(classResource != null) {
+					scene.getStylesheets().add(classResource.toExternalForm());
+				}
 			}
 		}
 		scene.setUserData(loader);

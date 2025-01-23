@@ -157,9 +157,6 @@ public class ChoiceBox {
 
 		Optional<Pair<ApplyOption, String>> result = dialog.showAndWait();
 
-		if (result.isPresent()) {
-			return result.get();
-		}
-		return null;
+		return result.orElse(null);
 	}
 }

@@ -31,7 +31,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 /**
- * BaseControlle is the framework template that is used as extend for any new JavaFX controller class,
+ * BaseController is the framework template that is used as extend for any new JavaFX controller class,
  * implemented in a JavaFX application.<p>
  * 
  * Sample usage:<br>

@@ -71,9 +71,6 @@ public final class ChartMarker {
 		if (Double.isNaN(viewOrder) || Double.isInfinite(viewOrder)) {
 			throw new IllegalArgumentException("Value overflow (viewOrder) when constructing the chart marker");
 		}
-		if (belongingAxis < Integer.MIN_VALUE || belongingAxis > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException("Value overflow (belongingAxis) when constructing the chart marker");
-		}
 		this.container = null;
 		this.children = new Shape[0];
 		this.marker = marker;
@@ -106,9 +103,6 @@ public final class ChartMarker {
 		}
 		if (Double.isNaN(viewOrder) || Double.isInfinite(viewOrder)) {
 			throw new IllegalArgumentException("Value overflow (viewOrder) when constructing the chart marker");
-		}
-		if (belongingAxis < Integer.MIN_VALUE || belongingAxis > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException("Value overflow (belongingAxis) when constructing the chart marker");
 		}
 		this.container = container;
 		this.children = children;
@@ -151,27 +145,27 @@ public final class ChartMarker {
 		return new ChartMarker(container, children, dataPoint, viewOrder, belongingAxis);
 	}
 
-	public final Pane getContainer() {
+	public Pane getContainer() {
 		return container;
 	}
 
-	public final Shape[] getChildren() {
+	public Shape[] getChildren() {
 		return children;
 	}
 
-	public final Shape getMarker() {
+	public Shape getMarker() {
 		return marker;
 	}
 
-	public final DataPoint getDataPoint() {
+	public DataPoint getDataPoint() {
 		return dataPoint;
 	}
 
-	public final double getViewOrder() {
+	public double getViewOrder() {
 		return viewOrder;
 	}
 
-	public final int getBelongingAxis() {
+	public int getBelongingAxis() {
 		return belongingAxis;
 	}
 
@@ -186,9 +180,6 @@ public final class ChartMarker {
 			if (x == null || y == null) {
 				throw new NullPointerException("DataPoint x or y value is null");
 			}
-			if (x.length() > Integer.MAX_VALUE || y.length() > Integer.MAX_VALUE) {
-				throw new IllegalArgumentException("DataPoint x or y value is out of range");
-			}
 			xsValue = x;
 			ysValue = y;
 			xnValue = -1;
@@ -199,7 +190,7 @@ public final class ChartMarker {
 			if (x == null || y == null) {
 				throw new NullPointerException("DataPoint x or y value is null");
 			}
-			if (x.length() > Integer.MAX_VALUE || y.longValue() > Long.MAX_VALUE || y.longValue() < Long.MIN_VALUE || Double.isNaN(y.doubleValue()) || Double.isInfinite(y.doubleValue())) {
+			if (Double.isNaN(y.doubleValue()) || Double.isInfinite(y.doubleValue())) {
 				throw new IllegalArgumentException("DataPoint x or y value is out of range");
 			}
 			xsValue = x;
@@ -212,7 +203,7 @@ public final class ChartMarker {
 			if (x == null || y == null) {
 				throw new NullPointerException("DataPoint x or y value is null");
 			}
-			if (y.length() > Integer.MAX_VALUE || x.longValue() > Long.MAX_VALUE || x.longValue() < Long.MIN_VALUE || Double.isNaN(x.doubleValue()) || Double.isInfinite(x.doubleValue())) {
+			if (Double.isNaN(x.doubleValue()) || Double.isInfinite(x.doubleValue())) {
 				throw new IllegalArgumentException("DataPoint x or y value is out of range");
 			}
 			xsValue = null;
@@ -225,7 +216,7 @@ public final class ChartMarker {
 			if (x == null || y == null) {
 				throw new NullPointerException("DataPoint x or y value is null");
 			}
-			if (x.longValue() > Long.MAX_VALUE || x.longValue() < Long.MIN_VALUE || y.longValue() > Long.MAX_VALUE || y.longValue() < Long.MIN_VALUE || Double.isNaN(x.doubleValue()) || Double.isInfinite(x.doubleValue()) || Double.isNaN(y.doubleValue()) || Double.isInfinite(y.doubleValue())) {
+			if (Double.isNaN(x.doubleValue()) || Double.isInfinite(x.doubleValue()) || Double.isNaN(y.doubleValue()) || Double.isInfinite(y.doubleValue())) {
 				throw new IllegalArgumentException("DataPoint x or y value is out of range");
 			}
 			xsValue = null;
@@ -250,19 +241,19 @@ public final class ChartMarker {
 			return new DataPoint(x, y);
 		}
 
-		public final String getXsValue() {
+		public String getXsValue() {
 			return xsValue;
 		}
 
-		public final String getYsValue() {
+		public String getYsValue() {
 			return ysValue;
 		}
 
-		public final Number getXnValue() {
+		public Number getXnValue() {
 			return xnValue;
 		}
 
-		public final Number getYnValue() {
+		public Number getYnValue() {
 			return ynValue;
 		}
 

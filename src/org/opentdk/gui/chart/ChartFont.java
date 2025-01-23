@@ -27,10 +27,6 @@
  */
 package org.opentdk.gui.chart;
 
-import java.util.logging.Level;
-
-import org.opentdk.api.logger.MLogger;
-
 import javafx.scene.text.FontWeight;
 
 /**
@@ -63,9 +59,8 @@ public final class ChartFont {
 	}
 
 	private void checkSize(int size) {
-		if (size < 0 || size > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Size is negative or out of integer bounds ==> Use default " + this.size, getClass().getSimpleName(), "setSize");
-			return;
+		if (size < 0) {
+			throw new IllegalArgumentException("Size is negative or out of integer bounds");
 		}
 		this.size = size;
 	}
@@ -75,9 +70,8 @@ public final class ChartFont {
 	}
 
 	private void checkFamily(String family) {
-		if (family == null || family.isBlank() || family.length() > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Family is null, blank or too large ==> Use default " + this.family, getClass().getSimpleName(), "setFamily");
-			return;
+		if (family == null || family.isBlank()) {
+			throw new IllegalArgumentException("Family is null, blank or too large");
 		}
 		this.family = family;
 	}

@@ -30,7 +30,7 @@ package org.opentdk.gui.chart;
 public enum ChartType {
 	NONE, BAR, LINE;
 
-	public static final ChartType getChartType(String type) {
+	public static ChartType getChartType(String type) {
 		for (ChartType chartType : ChartType.values()) {
 			if (chartType != ChartType.NONE) {
 				if (chartType.name().equalsIgnoreCase(type)) {

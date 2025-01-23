@@ -58,12 +58,8 @@ public class DragAndDrop extends ListCell<String> {
 	private final ObjectProperty<ListCell<String>> drag = new SimpleObjectProperty<>();
 	/**
 	 * Enable drag and drop interaction between two list views.
-	 * @param left first {@link ListView}
-	 * @param right second {@link ListView}
 	 */
-	public DragAndDrop(ListView<String> left, ListView<String> right) {
-		ListView<String> first = left;
-		ListView<String> second = right;
+	public DragAndDrop(ListView<String> first, ListView<String> second) {
 
 		first.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		second.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

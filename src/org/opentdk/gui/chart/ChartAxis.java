@@ -29,9 +29,6 @@ package org.opentdk.gui.chart;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-
-import org.opentdk.api.logger.MLogger;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -58,7 +55,7 @@ import javafx.scene.text.Font;
  * @author FME (LK Test Solutions)
  *
  */
-public class ChartAxis {
+public final class ChartAxis {
 
 	private static final int maxChars = 10000;
 	private static final int maxFontSize = 1638;
@@ -116,325 +113,292 @@ public class ChartAxis {
 	/**
 	 * @return {@link #categories}
 	 */
-	public final List<String> getCategories() {
+	public List<String> getCategories() {
 		return categories;
 	}
 
 	/**
 	 * @return {@link #endMargin}
 	 */
-	public final int getEndMargin() {
+	public int getEndMargin() {
 		return endMargin;
 	}
 
 	/**
 	 * @return {@link #forceZeroInRange}
 	 */
-	public final boolean getForceZeroInRange() {
+	public boolean getForceZeroInRange() {
 		return forceZeroInRange;
 	}
 
 	/**
 	 * @return {@link #label}
 	 */
-	public final String getLabel() {
+	public String getLabel() {
 		return label;
 	}
 
 	/**
 	 * @return {@link #labelFont}
 	 */
-	public final ChartFont getLabelFont() {
+	public ChartFont getLabelFont() {
 		return labelFont;
 	}
 
 	/**
 	 * @return {@link #labelPadding}
 	 */
-	public final int getLabelPadding() {
+	public int getLabelPadding() {
 		return labelPadding;
 	}
 
 	/**
 	 * @return {@link #lowestValue}
 	 */
-	public final double getLowestValue() {
+	public double getLowestValue() {
 		return lowestValue;
 	}
 
 	/**
 	 * @return {@link #minorTickCount}
 	 */
-	public final int getMinorTickCount() {
+	public int getMinorTickCount() {
 		return minorTickCount;
 	}
 
 	/**
 	 * @return {@link #minorTickLength}
 	 */
-	public final double getMinorTickLength() {
+	public double getMinorTickLength() {
 		return minorTickLength;
 	}
 
 	/**
 	 * @return {@link #minorTickMarksVisible}
 	 */
-	public final boolean getMinorTickMarksVisible() {
+	public boolean getMinorTickMarksVisible() {
 		return minorTickMarksVisible;
 	}
 
 	/**
 	 * @return {@link #startMargin}
 	 */
-	public final int getStartMargin() {
+	public int getStartMargin() {
 		return startMargin;
 	}
 
 	/**
 	 * @return {@link #tickLabelColor}
 	 */
-	public final Color getTickLabelColor() {
+	public Color getTickLabelColor() {
 		return tickLabelColor;
 	}
 
 	/**
 	 * @return {@link #tickLabelFont}
 	 */
-	public final Font getTickLabelFont() {
+	public Font getTickLabelFont() {
 		return tickLabelFont;
 	}
 
 	/**
 	 * @return {@link #tickLabelGap}
 	 */
-	public final int getTickLabelGap() {
+	public int getTickLabelGap() {
 		return tickLabelGap;
 	}
 
 	/**
 	 * @return {@link #tickLabelRotation}
 	 */
-	public final int getTickLabelRotation() {
+	public int getTickLabelRotation() {
 		return tickLabelRotation;
 	}
 
 	/**
 	 * @return {@link #tickLabelsVisible}
 	 */
-	public final boolean getTickLabelsVisible() {
+	public boolean getTickLabelsVisible() {
 		return tickLabelsVisible;
 	}
 
 	/**
 	 * @return {@link #tickLength}
 	 */
-	public final double getTickLength() {
+	public double getTickLength() {
 		return tickLength;
 	}
 
 	/**
 	 * @return {@link #tickMarkColor}
 	 */
-	public final Color getTickMarkColor() {
+	public Color getTickMarkColor() {
 		return tickMarkColor;
 	}
 
 	/**
 	 * @return {@link #minorTickMarkColor}
 	 */
-	public final Color getMinorTickMarkColor() {
+	public Color getMinorTickMarkColor() {
 		return minorTickMarkColor;
 	}
 
 	/**
 	 * @return {@link #tickMarksVisible}
 	 */
-	public final boolean getTickMarksVisible() {
+	public boolean getTickMarksVisible() {
 		return tickMarksVisible;
 	}
 
 	/**
 	 * @return {@link #valueRange}
 	 */
-	public final double getValueRange() {
+	public double getValueRange() {
 		return valueRange;
 	}
 
 	/**
 	 * @return {@link #valueStep}
 	 */
-	public final double getValueStep() {
+	public double getValueStep() {
 		return valueStep;
 	}
 
 	/**
 	 * @return {@link #leaveOneStepSpace}
 	 */
-	public final boolean isLeaveOneStepSpace() {
+	public boolean isLeaveOneStepSpace() {
 		return leaveOneStepSpace;
 	}
 
-	public final void setCategories(List<String> values) {
-		if (values == null || values.isEmpty() || values.size() > Integer.MAX_VALUE) {
-			MLogger.getInstance().log(Level.SEVERE, "Values are null, empty or out of range ==> No values to add", getClass().getSimpleName(), "setCategories");
-			return;
+	public void setCategories(List<String> values) {
+		if (values == null || values.isEmpty()) {
+			throw new IllegalArgumentException("Values are null, empty or out of range ==> No values to add");
 		}
 		this.categories = values;
 	}
 
-	public final void setEndMargin(int size) {
+	public void setEndMargin(int size) {
 		if (size < 0 || size > maxMargin) {
-			MLogger.getInstance().log(Level.SEVERE, "Out of range ==> Allowed: 0 to " + maxMargin, getClass().getSimpleName(), "setEndMargin");
-			return;
+			throw new IllegalArgumentException("End margin out of range ==> Allowed: 0 to " + maxMargin);
 		}
 		this.endMargin = size;
 	}
 
-	public final void setForceZeroInRange(boolean forceZeroInRange) {
+	public void setForceZeroInRange(boolean forceZeroInRange) {
 		this.forceZeroInRange = forceZeroInRange;
 	}
 
-	public final void setLabel(String name) {
+	public void setLabel(String name) {
 		if (name == null || name.isBlank() || name.length() > maxChars) {
-			MLogger.getInstance().log(Level.SEVERE, "Label is null, blank or too large ==> Use default " + this.label, getClass().getSimpleName(), "setLabel");
-			return;
+			throw new IllegalArgumentException("Label is null, blank or too large");
 		}
 		this.label = name;
 	}
 
-	public final void setLabelFont(ChartFont font) {
-		if (font == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Font is null ==> Use default " + this.labelFont.toString(), getClass().getSimpleName(), "setLabelFont");
-			return;
-		}
+	public void setLabelFont(ChartFont font) {
 		this.labelFont = font;
 	}
 
-	public final void setLabelPadding(int pixelSize) {
+	public void setLabelPadding(int pixelSize) {
 		if (pixelSize < 0 || pixelSize > maxFontSize) {
-			MLogger.getInstance().log(Level.SEVERE, "Pixel size is out of range (< 0 or > " + maxFontSize + ") ==> Use default " + this.labelPadding, getClass().getSimpleName(), "setLabelPadding");
-			return;
+			throw new IllegalArgumentException("Label padding pixel size is out of range (< 0 or > " + maxFontSize + ")");
 		}
 		this.labelPadding = pixelSize;
 	}
 
-	public final void setLowestValue(double value) {
+	public void setLowestValue(double value) {
 		if (Double.isNaN(value) || Double.isInfinite(value)) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of range ==> Use default " + this.lowestValue, getClass().getSimpleName(), "setLowestValue");
-			return;
+			throw new IllegalArgumentException("Lowest axis value out of range");
 		}
 		this.lowestValue = value;
 	}
 
-	public final void setMinorTickCount(int value) {
+	public void setMinorTickCount(int value) {
 		if (value < 0 || value > maxMinorTickCount) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of long range ==> Use default " + this.minorTickCount, getClass().getSimpleName(), "setMinorTickCount");
-			return;
+			throw new IllegalArgumentException("Minor tick count out of range");
 		}
 		this.minorTickCount = value;
 	}
 
-	public final void setMinorTickLength(double value) {
+	public void setMinorTickLength(double value) {
 		if (Double.isNaN(value) || Double.isInfinite(value) || value < 0 || value > maxTickLength) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of long range ==> Use default " + this.minorTickLength, getClass().getSimpleName(), "setMinorTickLength");
-			return;
+			throw new IllegalArgumentException("Minor tick length out of long range");
 		}
 		this.minorTickLength = value;
 	}
 
-	public final void setMinorTickMarksVisible(boolean isVisible) {
+	public void setMinorTickMarksVisible(boolean isVisible) {
 		this.minorTickMarksVisible = isVisible;
 	}
 
-	public final void setStartMargin(int size) {
+	public void setStartMargin(int size) {
 		if (size < 0 || size > maxMargin) {
-			MLogger.getInstance().log(Level.SEVERE, "Out of range ==> Allowed: 0 to " + maxMargin, getClass().getSimpleName(), "setStartMargin");
-			return;
+			throw new IllegalArgumentException("Start margin out of range ==> Allowed: 0 to " + maxMargin);
 		}
 		this.startMargin = size;
 	}
 
-	public final void setTickLabelColor(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.tickLabelColor.toString(), getClass().getSimpleName(), "setTickLabelColor");
-			return;
-		}
+	public void setTickLabelColor(Color color) {
 		this.tickLabelColor = color;
 	}
 
-	public final void setTickLabelFont(Font font) {
-		if (font == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Font is null ==> Use default " + this.tickLabelFont.toString(), getClass().getSimpleName(), "setTickLabelFont");
-			return;
-		}
+	public void setTickLabelFont(Font font) {
 		this.tickLabelFont = font;
 	}
 
-	public final void setTickLabelGap(int size) {
+	public void setTickLabelGap(int size) {
 		if (size < 0 || size > maxFontSize) {
-			MLogger.getInstance().log(Level.SEVERE, "Size is out of range (< 0 or > " + maxFontSize + ") ==> Use default " + this.tickLabelGap, getClass().getSimpleName(), "setTickLabelGap");
-			return;
+			throw new IllegalArgumentException("Tick label gap is out of range (< 0 or > " + maxFontSize + ")");
 		}
 		this.tickLabelGap = size;
 	}
 
-	public final void setTickLabelRotation(int degree) {
+	public void setTickLabelRotation(int degree) {
 		if (degree < 0 || degree > 360) {
-			MLogger.getInstance().log(Level.SEVERE, "Degree value is out of range (< 0 or > 360) ==> Use default " + this.tickLabelRotation, getClass().getSimpleName(), "setTickLabelRotation");
-			return;
+			throw new IllegalArgumentException("Tick label rotation degree value is out of range (< 0 or > 360)");
 		}
 		this.tickLabelRotation = degree;
 	}
 
-	public final void setTickLabelsVisible(boolean isVisible) {
+	public void setTickLabelsVisible(boolean isVisible) {
 		this.tickLabelsVisible = isVisible;
 	}
 
-	public final void setTickLength(double value) {
+	public void setTickLength(double value) {
 		if (Double.isNaN(value) || Double.isInfinite(value) || value < 0 || value > maxTickLength) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of long range ==> Use default " + this.tickLength, getClass().getSimpleName(), "setTickLength");
-			return;
+			throw new IllegalArgumentException("Tick length out of range");
 		}
 		this.tickLength = value;
 	}
 
-	public final void setTickMarkColor(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.tickMarkColor.toString(), getClass().getSimpleName(), "setTickMarkColor");
-			return;
-		}
+	public void setTickMarkColor(Color color) {
 		this.tickMarkColor = color;
 	}
 
-	public final void setMinorTickMarkColor(Color color) {
-		if (color == null) {
-			MLogger.getInstance().log(Level.SEVERE, "Color is null ==> Use default " + this.minorTickMarkColor.toString(), getClass().getSimpleName(), "setMinorTickMarkColor");
-			return;
-		}
+	public void setMinorTickMarkColor(Color color) {
 		this.minorTickMarkColor = color;
 	}
 
-	public final void setTickMarksVisible(boolean isVisible) {
+	public void setTickMarksVisible(boolean isVisible) {
 		this.tickMarksVisible = isVisible;
 	}
 
-	public final void setValueRange(double value) {
+	public void setValueRange(double value) {
 		if (Double.isNaN(value) || Double.isInfinite(value)) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of long range ==> Use default " + this.valueRange, getClass().getSimpleName(), "setValueRange");
-			return;
+			throw new IllegalArgumentException("Value range out of range");
 		}
 		this.valueRange = value;
 	}
 
-	public final void setValueStep(double value) {
+	public void setValueStep(double value) {
 		if (Double.isNaN(value) || Double.isInfinite(value)) {
-			MLogger.getInstance().log(Level.SEVERE, "Value out of long range ==> Use default " + this.valueStep, getClass().getSimpleName(), "setValueStep");
-			return;
+			throw new IllegalArgumentException("Value step out of range");
 		}
 		this.valueStep = value;
 	}
 
-	public final void setLeaveOneStepSpace(boolean leaveOneStepSpace) {
+	public void setLeaveOneStepSpace(boolean leaveOneStepSpace) {
 		this.leaveOneStepSpace = leaveOneStepSpace;
 	}
 

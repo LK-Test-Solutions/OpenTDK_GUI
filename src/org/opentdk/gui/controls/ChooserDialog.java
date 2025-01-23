@@ -30,9 +30,6 @@ package org.opentdk.gui.controls;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-
-import org.opentdk.api.logger.MLogger;
 
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -117,13 +114,11 @@ public final class ChooserDialog {
 	public static List<File> openFileChooser(String title, ExtensionType ext, DialogType type, String latestPath) {
 		String chooserTitle = null;
 		if (title == null || title.isBlank()) {
-			MLogger.getInstance().log(Level.WARNING, "Title is null or blank", ChooserDialog.class.getSimpleName(), "openFileChooserDialog");
-			chooserTitle = "";
+			throw new IllegalArgumentException("Title is null or blank");
 		} else {
 			chooserTitle = title;
 		}
 
-		File pathToLoad = null;
 		File temp = null;
 		if (latestPath == null || latestPath.isBlank()) {
 			temp = new File(System.getProperty("user.home"));
@@ -131,10 +126,9 @@ public final class ChooserDialog {
 			temp = new File(latestPath);
 			if(!temp.exists() || !temp.isDirectory())	{
 				temp = new File(System.getProperty("user.home"));
-				MLogger.getInstance().log(Level.WARNING, "Latest path does not exist or is no directory", ChooserDialog.class.getSimpleName(), "openFileChooserDialog");
 			}
 		}
-		pathToLoad = temp; // In any case there is directory to load
+		File pathToLoad = temp; // In any case there is directory to load
 
 		final FileChooser fileChooser = new FileChooser();
 
@@ -143,14 +137,10 @@ public final class ChooserDialog {
 		fileChooser.setInitialDirectory(pathToLoad);
 		fileChooser.getExtensionFilters().addAll(ext.getFilters());
 
-		switch (type) {
-		case CHOOSE:
-			return fileChooser.showOpenMultipleDialog(null);
-		case SAVE:
-			return Arrays.asList(fileChooser.showSaveDialog(null));
-		default:
-			throw new RuntimeException("No DialogType detected in openFileChooser");
-		}
+		return switch (type) {
+			case CHOOSE -> fileChooser.showOpenMultipleDialog(null);
+			case SAVE -> Arrays.asList(fileChooser.showSaveDialog(null));
+		};
 	}
 
 	/**
@@ -175,8 +165,7 @@ public final class ChooserDialog {
 	public static File openDirectoryChooser(String title, String latest) {
 		String chooserTitle = null;
 		if (title == null || title.isBlank()) {
-			MLogger.getInstance().log(Level.WARNING, "Title is null or blank", ChooserDialog.class.getSimpleName(), "openDirectoryChooser");
-			chooserTitle = "";
+			throw new IllegalArgumentException("Title is null or blank");
 		} else {
 			chooserTitle = title;
 		}

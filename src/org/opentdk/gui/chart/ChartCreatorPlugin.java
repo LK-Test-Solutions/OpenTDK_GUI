@@ -29,11 +29,9 @@ package org.opentdk.gui.chart;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
+import java.io.UncheckedIOException;
 
 import javax.imageio.ImageIO;
-
-import org.opentdk.api.logger.MLogger;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
@@ -87,7 +85,7 @@ import javafx.scene.transform.Scale;
  * @author FME (LK Test Solutions)
  *
  */
-public final class ChartCreatorPlugin {
+public class ChartCreatorPlugin {
 
 	private final ChartCreator creator;
 	private final String chartType;
@@ -139,36 +137,26 @@ public final class ChartCreatorPlugin {
 				out.getParentFile().mkdir();
 			}
 			success = exportChart(creator.getChart(), outputLocation, sharp);
-			if (success = true) {
-				MLogger.getInstance().log(Level.INFO, cType.name() + " chart created and exported to ==> " + out.getPath(), getClass().getSimpleName(), "run");
-			} else {
-				MLogger.getInstance().log(Level.SEVERE, cType.name() + " chart export failed to ==> " + out.getPath(), getClass().getSimpleName(), "run");
-			}
 		} else {
-			MLogger.getInstance().log(Level.SEVERE, "No chart type could be identified. No chart will be created!", getClass().getSimpleName(), "run");
+			throw new IllegalStateException("No chart type could be identified. No chart will be created!");
 		}
 	}
 
 	public Chart createChart() {
 		if (creator == null) {
-			MLogger.getInstance().log(Level.SEVERE, "ChartCreatorPlugin has to be initialized first!", getClass().getSimpleName(), "createChart");
-			return null;
+			throw new IllegalStateException("ChartCreatorPlugin has to be initialized first!");
 		}
 		ChartType cType = ChartType.getChartType(chartType);
 		if (cType != ChartType.NONE) {
 			creator.createChart(cType);
 			success = true;
-			MLogger.getInstance().log(Level.INFO, cType.name() + " chart created successfully", getClass().getSimpleName(), "createChart");
 			return creator.getChart();
 		} else {
-			MLogger.getInstance().log(Level.SEVERE, "No chart type could be identified. No chart will be created!", getClass().getSimpleName(), "createChart");
-			return null;
+			throw new IllegalStateException("No chart type could be identified. No chart will be created!");
 		}
 	}
 
 	private boolean exportChart(Chart chart, String exportFile, double scale) {
-		boolean ret = false;
-
 		SnapshotParameters snapshotParameter = new SnapshotParameters();
 		snapshotParameter.setTransform(new Scale(scale, scale));
 		WritableImage image = chart.snapshot(snapshotParameter, null);
@@ -181,11 +169,10 @@ public final class ChartCreatorPlugin {
 		try {
 			File exportLoc = new File(exportFile);
 			ImageIO.write(SwingFXUtils.fromFXImage(view.getImage(), null), "png", exportLoc);
-			ret = true;
+			return true;
 		} catch (IOException e) {
-			MLogger.getInstance().log(Level.SEVERE, e);
+			throw new UncheckedIOException(e);
 		}
-		return ret;
 	}
 
 	public boolean isSuccess() {
