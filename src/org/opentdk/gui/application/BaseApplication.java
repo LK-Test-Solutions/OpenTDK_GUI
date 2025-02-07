@@ -30,7 +30,6 @@ package org.opentdk.gui.application;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.opentdk.gui.controls.ChoiceBox;
@@ -395,24 +394,24 @@ public abstract class BaseApplication extends Application {
 		Parent parent = null;
 		FXMLLoader loader = new FXMLLoader();
 
-		URL fxmlLocation = this.getClass().getResource(fxmlFile);
+		URL fxmlLocation = getClass().getResource(fxmlFile);
 		if (fxmlLocation == null) {
 			throw new MalformedURLException("URL instance for FXML is null. Either it does not exist or the reference to the controller class is wrong. The easiest way is to have the controller and the FXML in the same package and just pass the FXML file name ==> no stage will be loaded!");
 		}
 		loader.setLocation(fxmlLocation);
 
-		if (this.resourceBundle != null) {
-			loader.setResources(this.resourceBundle);
+		if (resourceBundle != null) {
+			loader.setResources(resourceBundle);			
 		}
 		parent = loader.load();
 
 		Scene scene = new Scene(parent);
-		if (this.styleSheet != null) {
-			URL cssLocation = this.getClass().getResource(this.styleSheet);
+		if (styleSheet != null) {
+			URL cssLocation = getClass().getResource(styleSheet);
 			if (cssLocation == null) {
 				throw new IllegalArgumentException("Style sheet CSS file not found.");
 			} else {
-				URL classResource = this.getClass().getResource(this.styleSheet);
+				URL classResource = getClass().getResource(styleSheet);
 				if(classResource != null) {
 					scene.getStylesheets().add(classResource.toExternalForm());
 				}
@@ -445,14 +444,14 @@ public abstract class BaseApplication extends Application {
 		Parent parent = null;
 		FXMLLoader loader = new FXMLLoader();
 
-		URL fxmlLocation = this.getClass().getResource(fxmlFile);
+		URL fxmlLocation = getClass().getResource(fxmlFile);
 		if (fxmlLocation == null) {
 			throw new MalformedURLException("URL to FXML file could not be created ==> no stage will be loaded!");
 		}
 		loader.setLocation(fxmlLocation);
 
-		if (this.resourceBundle != null) {
-			loader.setResources(this.resourceBundle);
+		if (resourceBundle != null) {
+			loader.setResources(resourceBundle);
 		}
 		parent = loader.load();
 		loader.setRoot(parent);
@@ -476,21 +475,21 @@ public abstract class BaseApplication extends Application {
 	 */
 	private void setStageProperties() {
 
-		if (this.width < this.primaryStage.getMinWidth()) {
-			this.width = this.primaryStage.getMinWidth();
+		if (width < primaryStage.getMinWidth()) {
+			width = primaryStage.getMinWidth();
 		}
-		this.primaryStage.setWidth(this.width);
+		primaryStage.setWidth(width);
 
-		if (this.height < this.primaryStage.getMinHeight()) {
-			this.height = this.primaryStage.getMinHeight();
+		if (height < primaryStage.getMinHeight()) {
+			height = primaryStage.getMinHeight();
 		}
-		this.primaryStage.setHeight(this.height);
+		primaryStage.setHeight(height);
 
-		if (this.posX <= 0 && this.posY <= 0) {
-			this.primaryStage.centerOnScreen();
+		if (posX <= 0 && posY <= 0) {
+			primaryStage.centerOnScreen();
 		} else {
-			this.primaryStage.setX(this.posX);
-			this.primaryStage.setY(this.posY);
+			primaryStage.setX(posX);
+			primaryStage.setY(posY);
 		}
 	}
 

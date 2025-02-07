@@ -43,7 +43,7 @@ import javafx.stage.Stage;
  * 
  * @author HWA (LK Test Solutions)
  */
-public class BaseController {
+public abstract class BaseController {
 
     /** 
      * Reference to the runtime stage, created by the FXML and controller.

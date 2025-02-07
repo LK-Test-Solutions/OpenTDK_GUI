@@ -87,59 +87,59 @@ public class MessageDialog {
 		switch (mt) {
 			case INFORMATION -> {
 				alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle(rscBundle.getString("dict.Information"));
+				alert.setTitle(rscBundle.getString("dict.information"));
 			}
 			case CONFIRMATION -> {
 				alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(rscBundle.getString("dict.Confirmation"));
+				alert.setTitle(rscBundle.getString("dict.confirmation"));
 			}
 			case CONFIRMATION_YES_NO -> {
 				alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(rscBundle.getString("dict.Confirmation"));
-				buttonTypeOne = new ButtonType(rscBundle.getString("dict.Yes"));
-				buttonTypeTwo = new ButtonType(rscBundle.getString("dict.No"));
+				alert.setTitle(rscBundle.getString("dict.confirmation"));
+				buttonTypeOne = new ButtonType(rscBundle.getString("dict.yes"));
+				buttonTypeTwo = new ButtonType(rscBundle.getString("dict.no"));
 				alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
 			}
 			case CONFIRMATION_SAVE_SAVEAS -> {
 				alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(rscBundle.getString("dict.Confirmation"));
-				buttonTypeOne = new ButtonType(rscBundle.getString("dict.Save"));
-				buttonTypeTwo = new ButtonType(rscBundle.getString("text.SaveAs"));
-				buttonTypeFour = new ButtonType(rscBundle.getString("dict.Cancel"), ButtonData.CANCEL_CLOSE);
+				alert.setTitle(rscBundle.getString("dict.confirmation"));
+				buttonTypeOne = new ButtonType(rscBundle.getString("dict.save"));
+				buttonTypeTwo = new ButtonType(rscBundle.getString("text.saveAs"));
+				buttonTypeFour = new ButtonType(rscBundle.getString("dict.cancel"), ButtonData.CANCEL_CLOSE);
 				alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
 			}
 			case CONFIRMATION_SAVE_NEW -> {
 				alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(rscBundle.getString("dict.Confirmation"));
-				buttonTypeOne = new ButtonType(rscBundle.getString("dict.Save"));
-				buttonTypeTwo = new ButtonType(rscBundle.getString("text.CreateNew"));
-				buttonTypeThree = new ButtonType(rscBundle.getString("dict.Dismiss"));
-				buttonTypeFour = new ButtonType(rscBundle.getString("dict.Cancel"), ButtonData.CANCEL_CLOSE);
+				alert.setTitle(rscBundle.getString("dict.confirmation"));
+				buttonTypeOne = new ButtonType(rscBundle.getString("dict.save"));
+				buttonTypeTwo = new ButtonType(rscBundle.getString("text.createNew"));
+				buttonTypeThree = new ButtonType(rscBundle.getString("dict.dismiss"));
+				buttonTypeFour = new ButtonType(rscBundle.getString("dict.cancel"), ButtonData.CANCEL_CLOSE);
 				alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour);
 			}
 			case CONFIRMATION_CHECK -> {
 				alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle(rscBundle.getString("dict.Confirmation"));
+				alert.setTitle(rscBundle.getString("dict.confirmation"));
 				selection.setText(rscBundle.getString("dialog.apply.checkbox.text"));
 				alert.getDialogPane().setContent(selection);
-				buttonTypeFour = new ButtonType(rscBundle.getString("dict.Apply"), ButtonData.OK_DONE);
+				buttonTypeFour = new ButtonType(rscBundle.getString("dict.apply"), ButtonData.OK_DONE);
 				alert.getButtonTypes().setAll(buttonTypeFour);
 			}
 			case ERROR -> {
 				alert = new Alert(AlertType.ERROR);
-				alert.setTitle(rscBundle.getString("dict.Error"));
+				alert.setTitle(rscBundle.getString("dict.error"));
 			}
 			case WARNING -> {
 				alert = new Alert(AlertType.WARNING);
-				alert.setTitle(rscBundle.getString("dict.Warning"));
+				alert.setTitle(rscBundle.getString("dict.warning"));
 			}
 			case NONE -> {
 				alert = new Alert(AlertType.NONE);
-				alert.setTitle(rscBundle.getString("dict.None"));
+				alert.setTitle(rscBundle.getString("dict.none"));
 			}
 			default -> {
 				alert = new Alert(AlertType.NONE);
-				alert.setTitle(rscBundle.getString("dict.Unknown"));
+				alert.setTitle(rscBundle.getString("dict.unknown"));
 			}
 		}
 
