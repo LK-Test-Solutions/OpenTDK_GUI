@@ -37,17 +37,17 @@ public class TST_ChartCreation_createLineChart extends Application {
 
 	@Override
 	public void start(Stage arg0) {
-		createLineChartFull1();
-		createLineChartFull2();
+		createLineChartFull_1();
+		createLineChartFull_2();
 
 		// Stop JavaFX Thread
 		Platform.exit();
 	}
 
-	public void createLineChartFull1() {
+	public void createLineChartFull_1() {
 
 		ChartProperties cp = new ChartProperties();
-		cp.setTitle("CPU-Auslastung und Anzahl User f\u00FCr alle ABS-Blades in der Top Stunde 11 - 12 Uhr");
+		cp.setTitle("Title");
 		cp.setTitleFont(ChartFont.font(24, FontWeight.BOLD));
 		cp.setHeight(831);
 		cp.setWidth(2230);
@@ -58,7 +58,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setHorizontalGridLinesColor(Color.GREY);
 
 		ChartAxis xAxis = new ChartAxis();
-		xAxis.setLabel("Januar 2021");
+		xAxis.setLabel("X Axis Label");
 		xAxis.setValueRange(31);
 		xAxis.setValueStep(1);
 		xAxis.setLabelFont(ChartFont.font(18, FontWeight.BOLD));
@@ -67,7 +67,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setxAxis(xAxis);
 
 		ChartAxis y1Axis = new ChartAxis();
-		y1Axis.setLabel("CPU-Auslastung in %");
+		y1Axis.setLabel("Y1 Axis Label");
 		y1Axis.setValueRange(100);
 		y1Axis.setValueStep(5);
 		y1Axis.setLabelFont(ChartFont.font(18));
@@ -77,7 +77,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setY1Axis(y1Axis);
 
 		ChartAxis y2Axis = new ChartAxis();
-		y2Axis.setLabel("Anzahl User");
+		y2Axis.setLabel("Y2 Axis Label");
 		y2Axis.setValueRange(7000);
 		y2Axis.setValueStep(1000);
 		y2Axis.setLabelFont(ChartFont.font(18));
@@ -87,7 +87,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setY2Axis(y2Axis);
 
 		ChartSeries series1 = new ChartSeries();
-		series1.setSeriesName("CPU Auslastung in %");
+		series1.setSeriesName("Series1");
 		List<String> series1Values = new ArrayList<>(Collections.nCopies(31, (String) null));
 		series1Values.set(4, "50");
 		series1Values.set(5, "55");
@@ -96,7 +96,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		series1.setBelongingAxis(0);
 
 		ChartSeries series2 = new ChartSeries();
-		series2.setSeriesName("Anzahl User");
+		series2.setSeriesName("Series2");
 		List<String> series2Values = new ArrayList<>(Collections.nCopies(31, (String) null));
 		series2Values.set(4, "3800");
 		series2Values.set(5, "4000");
@@ -112,7 +112,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		List<ChartMarker> chartMarkers = new ArrayList<>();
 
 		StackPane pane = new StackPane();
-		Text text = new Text("Neujahr");
+		Text text = new Text("Text");
 		text.setRotate(270);
 		text.setFill(Color.GREY);
 		text.setFont(Font.font(24));
@@ -139,17 +139,17 @@ public class TST_ChartCreation_createLineChart extends Application {
 
 		cp.setChartMarkers(chartMarkers);
 
-		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("LINE", "./output/LineChart1.png", cp, 2);
+		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("LINE", "./output/LineChart_1.png", cp, 2);
 
 		chartPlugin.run();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 	}
 
-	public void createLineChartFull2() {		
+	public void createLineChartFull_2() {
 		ChartProperties cp = new ChartProperties();
-		cp.setTitle("Alle Standorte \"ADAG-Schaden@KV_KalkBelegPrf_cmdComplete_execute\"\n\tVDI Antwortzeit ohne Erststarts, Anzahl Vorgaenge mit Erststarts");
+		cp.setTitle("Title");
 		cp.setPlotAreaColor(Color.valueOf("rgb(188,222,255)"));
 		cp.setLegendColor(Color.valueOf("rgb(222,222,222)"));
 		cp.setTitleFont(ChartFont.font(18, FontWeight.BOLD));
@@ -177,7 +177,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setxAxis(xAxis);
 		
 		ChartAxis y1Axis = new ChartAxis();
-		y1Axis.setLabel("Antwortzeit in Sek");
+		y1Axis.setLabel("Y1 Axis Label");
 		y1Axis.setLabelFont(ChartFont.font(16));
 		y1Axis.setValueRange(15);
 		y1Axis.setValueStep(1);
@@ -189,7 +189,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		cp.setY1Axis(y1Axis);
 		
 		ChartAxis y2Axis = new ChartAxis();
-		y2Axis.setLabel("Anzahl Vorgaenge");
+		y2Axis.setLabel("Y2 Axis Label");
 		y2Axis.setLabelFont(ChartFont.font(16));
 		y2Axis.setValueRange(7000);
 		y2Axis.setValueStep(1000);
@@ -203,7 +203,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		List<ChartSeries> series = new ArrayList<>();
 		
 		ChartSeries counts = new ChartSeries();
-		counts.setSeriesName("Anzahl Vorgaenge");
+		counts.setSeriesName("Series1");
 		counts.setSeriesLegendNode(new Circle(5));
 		counts.setSeriesColor(Color.WHITE);
 		series.add(counts);
@@ -236,7 +236,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		ChartSeries responseTimes = new ChartSeries();
 		responseTimes.setBelongingAxis(0);
 		responseTimes.setSeriesColor(Color.STEELBLUE);
-		responseTimes.setSeriesName("Alle Standorte VDI");
+		responseTimes.setSeriesName("Series2");
 		responseTimes.setSeriesSymbolSize(3);
 		responseTimes.setSeriesLegendNode(new Circle(5));
 		List<String> averages = new ArrayList<>(Collections.nCopies(94, (String) null));
@@ -247,7 +247,7 @@ public class TST_ChartCreation_createLineChart extends Application {
 		ChartSeries quantileValues = new ChartSeries();
 		quantileValues.setBelongingAxis(0);
 		quantileValues.setSeriesColor(Color.RED);
-		quantileValues.setSeriesName("Alle Standorte Quantile 80 %");
+		quantileValues.setSeriesName("Series3");
 		quantileValues.setSeriesSymbolSize(3);
 		quantileValues.setSeriesLegendNode(new Circle(5));
 		List<String> quantiles = new ArrayList<>(Collections.nCopies(94, (String) null));
@@ -256,15 +256,15 @@ public class TST_ChartCreation_createLineChart extends Application {
 		series.add(quantileValues);
 		
 		ChartSeries references = new ChartSeries();
-		references.setSeriesName("Referenz Mittelwert");
+		references.setSeriesName("Text");
 		references.setSeriesColor(Color.GREEN);
 		series.add(references);
 				
 		cp.setSeriesValues(series);
 
-		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("LINE", "./output/LineChart2.png", cp);
+		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("LINE", "./output/LineChart_2.png", cp);
 		chartPlugin.run();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 		

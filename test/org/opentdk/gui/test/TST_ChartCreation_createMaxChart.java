@@ -17,20 +17,16 @@ public class TST_ChartCreation_createMaxChart extends Application {
 	public void start(Stage arg0) {
 		ChartProperties cp = new ChartProperties();
 		
-		String title = "";
-		for(int i=0; i<10000; i++) {
-			title+="-";
-		}
+		StringBuilder title = new StringBuilder();
+		title.append("-".repeat(10000));
 		
-		cp.setTitle(title);
+		cp.setTitle(title.toString());
 		cp.setWidth(10000);
 		cp.setHeight(10000);
-		
-		
-		
+
 		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("BAR", "./output/MaxBarChart.png", cp);
 		chartPlugin.run();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 		// Stop JavaFX Thread

@@ -22,7 +22,7 @@ public class TST_ChartCreation_getChartObject extends Application {
 			
 		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("LINE", "./output/Dummy.png", cp);
 		Chart chart = chartPlugin.createChart();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 		

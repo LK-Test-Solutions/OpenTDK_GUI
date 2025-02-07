@@ -3,6 +3,7 @@ package org.opentdk.gui.test;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.opentdk.gui.chart.ChartAxis;
@@ -79,10 +80,9 @@ public class TST_ChartCreation_chartStage extends Application {
 			0.946, 0.941, 0.937, 0.875, 0.931};
 	
 	private double maxBackendValue = 0;
-	private List<String> xCategories = new ArrayList<>();
-	private List<Double> backendNumbers = new ArrayList<>();
-	private List<String> backendValues = new ArrayList<>();
-	private final String meshtrace = "Vertrag Oeffnen";
+	private final List<String> xCategories = new ArrayList<>();
+	private final List<Double> backendNumbers = new ArrayList<>();
+	private final List<String> backendValues = new ArrayList<>();
 	private DecimalFormat numberFormat;
 	
 	public static void main(String[] args) {
@@ -94,10 +94,8 @@ public class TST_ChartCreation_chartStage extends Application {
 		DecimalFormatSymbols format = DecimalFormatSymbols.getInstance();
 		format.setDecimalSeparator('.');
 		numberFormat = new DecimalFormat("0.00", format);
-		
-		for(String value : this.xValues) {
-			this.xCategories.add(value);
-		}
+
+		Collections.addAll(this.xCategories, this.xValues);
 		for(double value : this.yValues) {
 			this.backendValues.add(String.valueOf(value));
 			this.backendNumbers.add(value);
@@ -116,9 +114,9 @@ public class TST_ChartCreation_chartStage extends Application {
 		
 	}
 
-	private final Chart createBackendChart() {
+	private Chart createBackendChart() {
 		ChartProperties cp = new ChartProperties();
-		cp.setTitle("Backend-Zeiten ABS 09:00 - 17:00 Uhr");
+		cp.setTitle("Title");
 		cp.setTitleFont(ChartFont.font(15, FontWeight.BOLD));
 		cp.setPlotAreaColor(Color.WHITE);
 		cp.setLegendFont(ChartFont.font(14, FontWeight.NORMAL));
@@ -127,8 +125,6 @@ public class TST_ChartCreation_chartStage extends Application {
 		cp.setHorizontalGridLinesVisible(true);
 		cp.setHorizontalGridLinesColor(Color.BLACK);
 		cp.setNumberAxisFormat(this.numberFormat);
-//		int chartPadding = 10;
-//		cp.setChartPadding(new Insets(chartPadding, chartPadding, chartPadding, chartPadding));
 
 		ChartAxis xAxis = new ChartAxis();
 		xAxis.setCategories(this.xCategories);
@@ -139,7 +135,7 @@ public class TST_ChartCreation_chartStage extends Application {
 		cp.setxAxis(xAxis);
 
 		ChartAxis y1Axis = new ChartAxis();
-		y1Axis.setLabel("Antwortzeit [sec]");
+		y1Axis.setLabel("Seconds");
 		y1Axis.setLabelFont(ChartFont.font(14, FontWeight.BOLD));
 
 		/*
@@ -164,15 +160,13 @@ public class TST_ChartCreation_chartStage extends Application {
 		y1Axis.setForceZeroInRange(false);
 		y1Axis.setTickLength(5);
 		y1Axis.setMinorTickMarkColor(Color.BLACK);
-//		y1Axis.setMinorTickCount(0);
-//		y1Axis.setMinorTickLength(0);
 		cp.setY1Axis(y1Axis);
 
 		List<ChartSeries> series = new ArrayList<>();
 		ChartSeries serie = new ChartSeries();
 		serie.setBelongingAxis(0);
 		serie.setSeriesColor(Color.STEELBLUE);
-		serie.setSeriesName(this.meshtrace);
+		serie.setSeriesName("Values");
 		serie.setSeriesSymbolSize(2);
 		serie.setSeriesLegendNode(new Circle(3));
 		serie.setSeriesValues(this.backendValues);

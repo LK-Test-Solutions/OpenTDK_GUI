@@ -51,7 +51,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 	public void start(Stage arg0) {
 
 		NumberAxis xAxis = new NumberAxis(1, 31, 1);		
-		xAxis.setLabel("Januar 2021");
+		xAxis.setLabel("X Label");
 //		xAxis.setTickLabelRotation(270);
 		xAxis.setTickLabelFill(Color.BLACK);
 		xAxis.setTickLabelFont(Font.font(14));
@@ -64,7 +64,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 //		xAxis.setForceZeroInRange(true);
 		
 		NumberAxis y1Axis = new NumberAxis(5, 70, 5);
-		y1Axis.setLabel("CPU-Auslastung in %");
+		y1Axis.setLabel("Y1 Label");
 //		xAxis.setTickLabelRotation(270);
 		y1Axis.setTickLabelFill(Color.BLACK);
 		y1Axis.setTickLabelFont(Font.font(14));
@@ -76,7 +76,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 		y1Axis.setAnimated(false);
 		
 		NumberAxis y2Axis = new NumberAxis(1000, 7000, 1000);
-		y2Axis.setLabel("Anzahl User");
+		y2Axis.setLabel("Y2 Label");
 //		xAxis.setTickLabelRotation(270);
 		y2Axis.setTickLabelFill(Color.BLACK);
 		y2Axis.setTickLabelFont(Font.font(14));
@@ -88,7 +88,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 		y2Axis.setAnimated(false);
 
 		CustomLineChart<Number, Number> chart = new CustomLineChart<>(xAxis, y1Axis, y2Axis);		
-		chart.setTitle("CPU-Auslastung und Anzahl User f\u00FCr alle ABS-Blades in der Top Stunde 11 - 12 Uhr");
+		chart.setTitle("Title");
 		chart.setVerticalGridLinesVisible(false);
 		chart.setVerticalZeroLineVisible(false);
 		chart.setHorizontalGridLinesVisible(true);
@@ -100,8 +100,8 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 		
 		Legend legend = new Legend();
 		ObservableList<LegendItem> items = FXCollections.observableArrayList();
-		items.add(new LegendItem("CPU-Auslastung in %", new Rectangle(10, 10, 10, 10)));
-		items.add(new LegendItem("Anzahl User", new Rectangle(10, 10, 10, 10)));
+		items.add(new LegendItem("Series1", new Rectangle(10, 10, 10, 10)));
+		items.add(new LegendItem("Series2", new Rectangle(10, 10, 10, 10)));
 		legend.setItems(items);
 		chart.setLegend(legend);
 		
@@ -109,7 +109,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 //		series1Values.set(4, 50);
 //		series1Values.set(5, 55)
 		Series<Number, Number> userCount = new Series<>();
-		userCount.setName("Anzahl User");
+		userCount.setName("Series1");
 		Data<Number, Number> userCount1 = new Data<>(4, 50, CustomLineChart.Y1_AXIS);
 		Data<Number, Number> userCount2 = new Data<>(5, 55, CustomLineChart.Y1_AXIS);
 //		userCount1.setNode(new Circle(5, Color.STEELBLUE));
@@ -119,7 +119,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 //		userCount.setNode(new Line());
 		
 		Series<Number, Number> cpuLoad = new Series<>();
-		userCount.setName("CPU Auslastung in %");
+		userCount.setName("Series2");
 		Data<Number, Number> cpuLoad1 = new Data<>(4, 3800, CustomLineChart.Y1_AXIS);
 		Data<Number, Number> cpuLoad2 = new Data<>(5, 4000, CustomLineChart.Y1_AXIS);
 		userCount.getData().add(cpuLoad1);
@@ -129,7 +129,7 @@ public class TST_ChartCreation_withoutWrapper extends Application {
 		chart.getData().add(cpuLoad);
 				
 		StackPane pane = new StackPane();
-		Text text = new Text("Neujahr");
+		Text text = new Text("Text");
 		text.setRotate(270);
 		text.setFill(Color.GREY);
 		text.setFont(Font.font(24));

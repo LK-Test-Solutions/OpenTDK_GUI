@@ -102,7 +102,7 @@ public class TST_ChartCreation_createHistogram extends Application {
 		String quantile = "53402";
 		double dQuantile = Double.parseDouble(quantile) / 1000f;
 
-		String info = "Anzahl:\t\t\t\t " + (int) sum + "\nMittelwert Antwortzeit:\t " + dMean + " Sek\n" + "Quantile 80%:\t\t\t " + dQuantile + " Sek";			
+		String info = "Count:\t\t\t\t " + (int) sum + "\nMean:\t\t\t\t " + dMean + " Sek\n" + "Quantile 80%:\t\t\t " + dQuantile + " Sek";
 		StackPane pane = new StackPane();
 		Text text = new Text(info);
 //		text.setRotate(270);
@@ -121,13 +121,13 @@ public class TST_ChartCreation_createHistogram extends Application {
 		cp.setWidth(1461);
 		
 		ChartAxis xAxis = new ChartAxis();
-		xAxis.setLabel("Sekunden (sek)");
+		xAxis.setLabel("Seconds");
 		xAxis.setLabelFont(ChartFont.font(18));
 		xAxis.setCategories(xCategories);
 		cp.setxAxis(xAxis);
 		
 		ChartAxis y1Axis = new ChartAxis();
-		y1Axis.setLabel("Prozentsatz (%)");
+		y1Axis.setLabel("Percentage");
 		y1Axis.setLabelFont(ChartFont.font(18));
 		y1Axis.setValueRange(100);
 		y1Axis.setValueStep(10);
@@ -148,7 +148,7 @@ public class TST_ChartCreation_createHistogram extends Application {
 		
 		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("BAR", "./output/Histogram.png", cp, 1);
 		chartPlugin.run();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 		// Stop JavaFX Thread

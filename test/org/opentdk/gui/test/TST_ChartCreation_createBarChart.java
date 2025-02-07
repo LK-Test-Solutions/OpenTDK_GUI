@@ -27,11 +27,11 @@ public class TST_ChartCreation_createBarChart extends Application {
 	private String chartType = "BAR";
 	private String outputFile;
 	private ChartProperties cp;
-	private String prefix = "HB_G01_Firmen_neu";
-	private String meshtraceInTitle = "Vertrag rechnen_HB";
-	private String fromRelTo = " - Rel. 20.5 bis 23.0";
-	private String testcase = "11240";
-	private String branch = "Firmen";
+	private String prefix = "Prefix ";
+	private String titleName = "Name";
+	private String fromRelTo = " - Suffix";
+	private String testcase = "testcase";
+	private String branch = "branch";
 	private double y1ValRange = 3000.0;
 	private double step = 1000.0;
 
@@ -39,7 +39,7 @@ public class TST_ChartCreation_createBarChart extends Application {
 	private String[] totalSerie = new String[] { "1450", "1470", "1640", "1550", "690", "691", "686", "620", "630", "1850", "620", "650", "623", "830", "901" };
 	private String[] backcallSerie = new String[] { "24", "20", "20", "20", "8", "8", "8", "8", "8", "12", "8", "8", "8", "8", "8" };
 	private String[] backendSerie = new String[] { "30", "30", "30", "30", "30", "30", "30", "30", "30", "30", "30", "30", "30", "30", "30" };
-	private String[] saIterations = new String[] { "20.5 RC7", "20.6 RC5_20H2", "21.0 RC6_neuVDI", "21.1 RC5", "21.1 U3_neuVDI", "22.0 RC6", "22.0 U3_AGL", "22.6 RC5", "22.6 U3_21H2", "23.0 IT6", "23.0 RC1", "23.0 RC2", "23.0 RC3", "23.0 RC4", "23.0 RC5" };
+	private String[] saIterations = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" };
 
 	private List<String> meanClientSerie;
 	private List<String> meanTotalSerie;
@@ -82,28 +82,28 @@ public class TST_ChartCreation_createBarChart extends Application {
 		}
 
 		ChartSeries series0 = new ChartSeries();
-		series0.setSeriesName("Antwortzeit Client");
+		series0.setSeriesName("Series0");
 		series0.setSeriesValues(meanClientSerie);
 		series0.setSeriesFontSize(14);
 		series0.setSeriesColor(Color.valueOf("steelblue"));
 		cp.getSeriesValues().add(series0);
 
 		ChartSeries series1 = new ChartSeries();
-		series1.setSeriesName("Antwortzeit Gesamt");
+		series1.setSeriesName("Series1");
 		series1.setSeriesValues(meanTotalSerie);
 		series1.setSeriesFontSize(14);
 		series1.setSeriesColor(Color.valueOf("lightblue"));
 		cp.getSeriesValues().add(series1);
 		
 		ChartSeries series2 = new ChartSeries();
-		series2.setSeriesName("Antwortzeit Backend");
+		series2.setSeriesName("Series2");
 		series2.setSeriesValues(meanBackendSerie);
 		series2.setSeriesFontSize(14);
 		series2.setSeriesColor(Color.valueOf("orange"));
 		cp.getSeriesValues().add(series2);
 		
 		ChartSeries series3 = new ChartSeries();
-		series3.setSeriesName("Anzahl Backendcalls");
+		series3.setSeriesName("Series3");
 		series3.setSeriesValues(meanBackcallSerie);
 		series3.setSeriesFontSize(14);
 		series3.setSeriesColor(Color.valueOf("green"));
@@ -111,7 +111,7 @@ public class TST_ChartCreation_createBarChart extends Application {
 
 		cp.setHeight(666);
 		cp.setWidth(1180);
-		cp.setTitle(prefix + "\"" + meshtraceInTitle + "\"" + fromRelTo);
+		cp.setTitle(prefix + "\"" + titleName + "\"" + fromRelTo);
 		cp.setTitleFont(ChartFont.font(20, FontWeight.findByName("bold")));
 		cp.setLegendSide(Side.valueOf("right".toUpperCase()));
 		cp.setLegendFont(ChartFont.font(14, FontWeight.findByName("normal")));
@@ -122,7 +122,7 @@ public class TST_ChartCreation_createBarChart extends Application {
 		cp.setChartContentPadding(0);
 
 		// Abscissa
-		cp.getxAxis().setLabel("Releases (" + testcase + "/" + branch + ")");
+		cp.getxAxis().setLabel("X Axis Label");
 		cp.getxAxis().setLabelFont(ChartFont.font(14));
 		cp.getxAxis().setTickLabelFont(Font.font(16));
 		cp.getxAxis().setTickLabelRotation(270);
@@ -130,7 +130,7 @@ public class TST_ChartCreation_createBarChart extends Application {
 		cp.getxAxis().setEndMargin(this.getAbscissaMargin());
 
 		// Ordinate
-		cp.getY1Axis().setLabel("Antwortzeit in ms / Anzahl Backend Calls");
+		cp.getY1Axis().setLabel("X Axis Label");
 		cp.getY1Axis().setValueRange(y1ValRange);
 		cp.getY1Axis().setValueStep(step);
 		cp.getY1Axis().setLabelFont(ChartFont.font(14));

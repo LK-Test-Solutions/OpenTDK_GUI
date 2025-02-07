@@ -1,4 +1,4 @@
-package org.opentdk.gui.test;
+package org.opentdk.gui.test.helpers;
 
 import com.kostikiadis.charts.MultiAxisChart;
 import com.kostikiadis.charts.MultiAxisLineChart;

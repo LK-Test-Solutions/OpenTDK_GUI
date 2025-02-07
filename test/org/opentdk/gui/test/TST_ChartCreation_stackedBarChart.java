@@ -27,18 +27,18 @@ public class TST_ChartCreation_stackedBarChart extends Application {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Backend Calls Diagnose");
+		primaryStage.setTitle("Stage Title");
 
 		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("Datum");
+		xAxis.setLabel("X Label");
 		xAxis.getCategories().addAll("27.02.2024", "05.03.2024", "12.03.2024", "19.03.2024", "26.03.2024", "02.04.2024");
 
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel("Summe");
+		yAxis.setLabel("Y Label");
 
 		StackedBarChart stackedBarChart = new StackedBarChart(xAxis, yAxis);
 		stackedBarChart.setLegendSide(Side.RIGHT);
-		stackedBarChart.setTitle("Backend Calls Summe Top 50 Messstrecken");
+		stackedBarChart.setTitle("Title");
 		stackedBarChart.setPrefWidth(1000);
 		stackedBarChart.setPrefHeight(600);
 		stackedBarChart.setCategoryGap(70);
@@ -52,7 +52,7 @@ public class TST_ChartCreation_stackedBarChart extends Application {
 		stackedBarChart.lookup(".chart-legend").setStyle(legendColor + legendFont);
 		
 		XYChart.Series dataSeries1 = new XYChart.Series();
-		dataSeries1.setName("Vertrag oeffnen_KB");
+		dataSeries1.setName("Series1");
 		dataSeries1.getData().add(new XYChart.Data("27.02.2024", 37465));
 		dataSeries1.getData().add(new XYChart.Data("05.03.2024", 34657));
 		dataSeries1.getData().add(new XYChart.Data("12.03.2024", 32845));
@@ -62,7 +62,7 @@ public class TST_ChartCreation_stackedBarChart extends Application {
 		stackedBarChart.getData().add(dataSeries1);
 
 		XYChart.Series dataSeries2 = new XYChart.Series();
-		dataSeries2.setName("Vertrag speichern I_KB");
+		dataSeries2.setName("Series2");
 		dataSeries2.getData().add(new XYChart.Data("27.02.2024", 17465));
 		dataSeries2.getData().add(new XYChart.Data("05.03.2024", 14657));
 		dataSeries2.getData().add(new XYChart.Data("12.03.2024", 12845));
@@ -72,7 +72,7 @@ public class TST_ChartCreation_stackedBarChart extends Application {
 		stackedBarChart.getData().add(dataSeries2);
 
 		XYChart.Series dataSeries3 = new XYChart.Series();
-		dataSeries3.setName("Vertrag speichern U_KB");
+		dataSeries3.setName("Series3");
 		dataSeries3.getData().add(new XYChart.Data("27.02.2024", 7465));
 		dataSeries3.getData().add(new XYChart.Data("05.03.2024", 4657));
 		dataSeries3.getData().add(new XYChart.Data("12.03.2024", 2845));
@@ -95,7 +95,7 @@ public class TST_ChartCreation_stackedBarChart extends Application {
 	}
 	
 	private String toRGB(Color color) {
-		return new String("rgb(" + (int) (color.getRed() * 255) + "," + (int) (color.getGreen() * 255) + "," + (int) (color.getBlue() * 255) + ")");
+		return "rgb(" + (int) (color.getRed() * 255) + "," + (int) (color.getGreen() * 255) + "," + (int) (color.getBlue() * 255) + ")";
 	}
 	
 	private String getStyleFromFont(ChartFont font) {

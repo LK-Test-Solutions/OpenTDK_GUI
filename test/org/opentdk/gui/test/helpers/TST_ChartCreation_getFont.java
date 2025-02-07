@@ -1,4 +1,4 @@
-package org.opentdk.gui.test;
+package org.opentdk.gui.test.helpers;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;

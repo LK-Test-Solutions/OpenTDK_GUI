@@ -25,7 +25,7 @@ public class TST_ChartCreation_createMinimumChart extends Application {
 		var properties = new ChartProperties();
 		var chartPlugin = new ChartCreatorPlugin("LINE", "./output/MinimumChart.png", properties);
 		chartPlugin.run();
-		if (chartPlugin.isSuccess() == false) {
+		if (!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 	}

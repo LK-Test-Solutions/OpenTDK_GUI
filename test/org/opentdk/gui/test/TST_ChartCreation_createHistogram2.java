@@ -21,10 +21,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class TST_ChartCreation_createHistogramCit extends Application {
+public class TST_ChartCreation_createHistogram2 extends Application {
 
 	private String[] xCategories = {"<= 0", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "1100", "1200", "> 1200"};
-	private String outputFile = "output/HistogrammCit.png";
+	private String outputFile = "output/Histogram_2.png";
 
 	private String[] normalValues = {"0", "0.0", "0.0", "0.0", "0.0", "16.27907", "83.72093", "0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "0"};
 	private String[] invalidValues = {"0.0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
@@ -47,7 +47,7 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 
 		// General settings
 
-		cp.setTitle("Histogramm HB_G01_Firmen_neu  \"Vertrag rechnen_HB\" - 25.0 RC4");
+		cp.setTitle("Title");
 		cp.setTitleFont(ChartFont.font(18, FontWeight.BOLD));
 		cp.setHeight(641);
 		cp.setWidth(1135);
@@ -56,7 +56,7 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 		// Axis
 
 		ChartAxis xaxis = new ChartAxis();
-		xaxis.setLabel("Zeitspanne ms");
+		xaxis.setLabel("Time range (ms)");
 		xaxis.setLabelFont(ChartFont.font(14));
 		xaxis.setCategories(Arrays.asList(xCategories));
 		xaxis.setTickLabelFont(Font.font(12));
@@ -64,7 +64,7 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 		cp.setxAxis(xaxis);
 
 		ChartAxis y1axis = new ChartAxis();
-		y1axis.setLabel("Anteil Antwortzeit (%)");
+		y1axis.setLabel("Response time (%)");
 		y1axis.setLabelFont(ChartFont.font(14));
 		y1axis.setValueRange(110);
 		y1axis.setValueStep(10);
@@ -75,7 +75,7 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 		List<ChartSeries> seriesValues  = new ArrayList<>();
 
 		ChartSeries normal = new ChartSeries();
-		normal.setSeriesName("Client Strecke - Normale Wert");
+		normal.setSeriesName("Series1");
 		normal.setSeriesValues(Arrays.asList(normalValues));
 		normal.setSeriesColor(Color.STEELBLUE);
 		normal.setSeriesLabelVisible(false);
@@ -83,21 +83,20 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 		seriesValues.add(normal);
 
 		ChartSeries invalid = new ChartSeries();
-		invalid.setSeriesName("Client Strecke - Null oder ungültige Werte");
+		invalid.setSeriesName("Series2");
 		invalid.setSeriesValues(Arrays.asList(invalidValues));
 		invalid.setSeriesColor(Color.RED);
 		invalid.setSeriesLabelVisible(false);
 		invalid.setSeriesFontSize(11);
-		seriesValues.add(invalid);
+//		seriesValues.add(invalid);
 
 		ChartSeries high = new ChartSeries();
-		high.setSeriesName("Client Strecke - Sehr hohe Werte");
+		high.setSeriesName("Series3");
 		high.setSeriesValues(Arrays.asList(highValues));
 		high.setSeriesColor(Color.ORANGE);
 		high.setSeriesLabelVisible(false);
 		high.setSeriesFontSize(11);
-		seriesValues.add(high);
-
+//		seriesValues.add(high);
 		cp.setSeriesValues(seriesValues);
 
 		// Markers
@@ -110,8 +109,8 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 			Text text = new Text(value);
 			text.setRotate(270);
 			text.setFill(Color.BLACK);
-			text.setFont(Font.font(15));
-			chartMarkers.add(ChartMarker.marker(new StackPane(), new Shape[] {text}, DataPoint.point(xCategories[i], asFloat + 15)));
+			text.setFont(Font.font(12));
+			chartMarkers.add(ChartMarker.marker(new StackPane(), new Shape[] {text}, DataPoint.point(xCategories[i], asFloat + 10)));
 			i++;
 		}
 		cp.setChartMarkers(chartMarkers);
@@ -121,7 +120,7 @@ public class TST_ChartCreation_createHistogramCit extends Application {
 
 		ChartCreatorPlugin chartPlugin = new ChartCreatorPlugin("BAR", outputFile, cp, 2);
 		chartPlugin.run();
-		if(chartPlugin.isSuccess() == false) {
+		if(!chartPlugin.isSuccess()) {
 			System.err.println("Chart creation finished with error ==> " + getClass().getSimpleName());
 		}
 	}
