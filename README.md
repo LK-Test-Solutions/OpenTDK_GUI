@@ -11,13 +11,7 @@ See the test cases of the project.
 ## Base Application Sample
 
 ````java
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.ConsoleHandler;
@@ -31,16 +25,11 @@ import java.util.logging.SimpleFormatter;
 import org.opentdk.gui.application.BaseApplication;
 import org.opentdk.gui.controls.MessageDialog.MessageType;
 
-import com.fme.safe.model.AppProperties;
-import com.fme.safe.view.LoginController;
 import com.fme.safe.view.RootController;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javafx.application.Platform;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.input.Clipboard;
 import lombok.Getter;
 import lombok.Setter;
 
